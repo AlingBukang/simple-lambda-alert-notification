@@ -16,5 +16,37 @@ functions:
           method: get
           cors: true
 
-resources: 
+  slack-notifications: 
+    handler: src/handlers/slack-notification/slack-notification.handler
+    environment: 
+      SLACK_WEBHOOK_URL: ${ssm:/error-slack-webhook-url~true}
+    events: 
+      - sns: 
+          arn: 
+            Ref: DogSub
+          topicName: ${self:service}-${self:provider.stage}-DogSub        
+
+resources: # CloudFormation template syntax
   Resources:
+    DogSub: #SNS
+      Type: AWS::SNS::Topic
+      Properties: 
+        TopicName: DogBreed
+
+    DoggoLogs: #Cloudwatch
+      Type: AWS::CloudWatch::Alarm
+      Properties:
+        AlarmName: DoggoAlert
+        AlarmDescription: Get generated dog name lambda alarm
+        Namespace: AWS/ApiGateway
+        MetricName: 5XXError
+        Dimensions:
+          - Name: ApiName
+            Value: ${self:provider.stage}-${self:service}
+        Statistic: Sum
+        ComparisonOperator: GreaterThanThreshold
+        Threshold: 0
+        Period: 60
+        EvaluationPeriods: 1
+        AlarmActions:
+          - Ref: DogSub   

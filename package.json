@@ -5,8 +5,8 @@
   "main": "handler.js",
   "scripts": {
     "ci": "yarn install --frozen-lockfile",
-    "package": "$(yarn bin)/sls package --aws-profile <put your profile name>",
-    "deploy": "$(yarn bin)/sls deploy --aws-profile <put your profile name>",
+    "package": "$(yarn bin)/sls package --aws-profile bukang",
+    "deploy": "$(yarn bin)/sls deploy --aws-profile bukang",
     "setup-dev": "source ./scripts/export-aws-credentials.sh"
   },
   "dependencies": {

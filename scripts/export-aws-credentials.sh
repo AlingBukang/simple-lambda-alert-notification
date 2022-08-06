@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-export awsAccessKey=<PUT KEY HERE>
-export awsSecretKey=<PUT KEY HERE>
+export awsAccessKey=<Your awsAccessKey>
+export awsSecretKey=<Your awsSecretKey>
