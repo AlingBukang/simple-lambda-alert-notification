@@ -1,4 +1,4 @@
-# Workshop details
+This is part of the DevOpsRepresent workshop.
 
 [Set Up Instructions](workshop-content/01-setup/01-setup.md)
 
